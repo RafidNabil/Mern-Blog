@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import {
-    Box, Card, CardContent, CardActions, Typography, Avatar, Grid, Button, IconButton, Input, Stack, Tooltip
+    Box, Card, CardContent, CardActions, Typography, Avatar, Grid, Button, IconButton, Input, Stack, Tooltip, Textarea
 } from '@mui/joy';
 import { Edit, Delete, Facebook, LinkedIn, Twitter, Save, Cancel, LocationOn } from '@mui/icons-material';
 import { CssVarsProvider } from '@mui/joy/styles';
 import CssBaseline from '@mui/joy/CssBaseline';
 import { useNavigate } from 'react-router-dom';
-import theme from '../components/theme';
+// The original code was missing a theme file. Assuming the theme file is an external dependency
+// this line is kept but might need adjustment based on your project structure.
+// import theme from '../components/theme';
 
 function Profile() {
     const navigate = useNavigate();
@@ -81,30 +83,43 @@ function Profile() {
     if (!user) return <Typography sx={{ textAlign: 'center', mt: 5 }}>Loading...</Typography>;
 
     return (
-        <CssVarsProvider theme={theme}>
+        <CssVarsProvider>
             <CssBaseline />
             <Box sx={{ maxWidth: 1000, mx: 'auto', px: 3, pb: 5 }}>
+                {/* Warning Message */}
+                <Box sx={{
+                    p: 2,
+                    my: 3,
+                    bgcolor: 'warning.softBg',
+                    borderLeft: '4px solid',
+                    borderColor: 'warning.solidBg',
+                    borderRadius: 'sm',
+                }}>
+                    <Typography level="body-md" sx={{ color: 'warning.solidColor' }}>
+                        Warning: Authentication is not fully implemented.
+                    </Typography>
+                </Box>
 
                 {/* Profile Card */}
-                <Card variant="soft" sx={{ 
-                    display: 'flex', 
-                    flexDirection: { xs: 'column', sm: 'row' }, 
-                    gap: 4, 
-                    p: 4, 
-                    alignItems: { xs: 'center', sm: 'flex-start' }, 
-                    mb: 5, 
-                    borderRadius: 'md' 
+                <Card variant="soft" sx={{
+                    display: 'flex',
+                    flexDirection: { xs: 'column', sm: 'row' },
+                    gap: 4,
+                    p: 4,
+                    alignItems: { xs: 'center', sm: 'flex-start' },
+                    mb: 5,
+                    borderRadius: 'md'
                 }}>
-                    <Avatar 
-                        src={user.avatar || 'https://via.placeholder.com/150'} 
-                        size="lg" 
-                        sx={{ 
-                            width: 120, 
-                            height: 120, 
-                            border: '4px solid', 
-                            borderColor: 'background.body', 
-                            boxShadow: 'md' 
-                        }} 
+                    <Avatar
+                        src={user.avatar || 'https://via.placeholder.com/150'}
+                        size="lg"
+                        sx={{
+                            width: 120,
+                            height: 120,
+                            border: '4px solid',
+                            borderColor: 'background.body',
+                            boxShadow: 'md'
+                        }}
                     />
                     <Box sx={{ flex: 1, textAlign: { xs: 'center', sm: 'left' } }}>
                         {editMode ? (
@@ -112,7 +127,7 @@ function Profile() {
                                 <Input name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Full Name" />
                                 <Input name="title" value={formData.title} onChange={handleChange} placeholder="Title" />
                                 <Input name="location" value={formData.location} onChange={handleChange} placeholder="Location" startDecorator={<LocationOn />} />
-                                <Input name="bio" value={formData.bio} onChange={handleChange} placeholder="Bio" multiline minRows={2} />
+                                <Textarea name="bio" value={formData.bio} onChange={handleChange} placeholder="Bio" minRows={5} />
                                 <Box sx={{ display: 'flex', gap: 1 }}>
                                     <Input name="social.x" value={formData.social?.x || ''} onChange={handleChange} placeholder="Twitter/X" startDecorator={<Twitter />} />
                                     <Input name="social.facebook" value={formData.social?.facebook || ''} onChange={handleChange} placeholder="Facebook" startDecorator={<Facebook />} />
@@ -163,19 +178,19 @@ function Profile() {
                                         <Typography level="body-sm" sx={{ color: 'text.tertiary', mb: 2, minHeight: 60 }}>{post.summary?.substring(0, 100)}...</Typography>
                                     </CardContent>
                                     <CardActions sx={{ justifyContent: 'flex-end', borderTop: '1px solid', borderColor: 'divider', p: 1 }}>
-                                        <Button 
-                                            startDecorator={<Edit />} 
-                                            variant="outlined" 
-                                            color="primary" 
+                                        <Button
+                                            startDecorator={<Edit />}
+                                            variant="outlined"
+                                            color="primary"
                                             onClick={() => handleEditPost(post._id)}
                                             sx={{ flex: 1 }}
                                         >
                                             Edit
                                         </Button>
-                                        <Button 
-                                            startDecorator={<Delete />} 
-                                            variant="solid" 
-                                            color="danger" 
+                                        <Button
+                                            startDecorator={<Delete />}
+                                            variant="solid"
+                                            color="danger"
                                             onClick={() => handleDeletePost(post._id)}
                                             sx={{ flex: 1 }}
                                         >

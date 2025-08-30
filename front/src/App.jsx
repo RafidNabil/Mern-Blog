@@ -10,6 +10,7 @@ import About from './pages/about';
 import Contact from './pages/contacts';
 import CreateBlogPost from './pages/createPost';
 import Profile from './pages/profile';
+import Search from './pages/searchResult'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -91,6 +92,14 @@ function App() {
                     element={
                         <Layout>
                             <Profile/>
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/search"
+                    element={
+                        <Layout>
+                            <Search/>
                         </Layout>
                     }
                 />

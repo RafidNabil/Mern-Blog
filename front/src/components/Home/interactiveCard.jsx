@@ -60,6 +60,7 @@ export default function InteractiveCard({ post, authorsMap, topicMap }) {
             }}
         >
             <CardContent sx={{ flex: 1, padding: 0 }}>
+
                 {/* Author + Date */}
                 <Box sx={{ display: 'flex', gap: 1, mb: 1, alignItems: 'center' }}>
                     <Typography

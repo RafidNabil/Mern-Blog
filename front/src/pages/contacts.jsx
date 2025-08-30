@@ -1,87 +1,89 @@
-import * as React from 'react';
-import { CssVarsProvider } from '@mui/joy/styles';
+import React from 'react';
+import {
+    CssVarsProvider,
+    Sheet,
+    Typography,
+    FormControl,
+    FormLabel,
+    Input,
+    Textarea,
+    Button,
+    Box,
+} from '@mui/joy';
 import CssBaseline from '@mui/joy/CssBaseline';
-import Box from '@mui/joy/Box';
-import Typography from '@mui/joy/Typography';
-import TextField from '@mui/joy/TextField';
-import Button from '@mui/joy/Button';
-import Card from '@mui/joy/Card';
-
 import theme from '../components/theme';
 
-export default function ContactForm() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const formData = new FormData(event.currentTarget);
-        console.log({
-            name: formData.get('name'),
-            email: formData.get('email'),
-            message: formData.get('message'),
-        });
-        alert('Form submitted!'); // Replace with actual functionality
-    };
-
+const ContactForm = () => {
     return (
         <CssVarsProvider theme={theme}>
             <CssBaseline />
             <Box
                 sx={{
-                    bgcolor: 'neutral.900',
-                    color: 'common.white',
+                    bgcolor: 'background.body',
                     minHeight: '100vh',
+                    p: { xs: 2, md: 8 },
                     display: 'flex',
-                    alignItems: 'center',
                     justifyContent: 'center',
-                    px: 2,
+                    alignItems: 'center',
                 }}
             >
-                <Card
+                <Sheet
+                    variant="outlined"
                     sx={{
-                        maxWidth: 500,
                         width: '100%',
-                        p: 3,
-                        bgcolor: 'neutral.800',
-                        borderRadius: '12px',
-                        boxShadow: 'lg',
+                        maxWidth: '600px',
+                        borderRadius: 'lg',
+                        boxShadow: 'md',
+                        p: { xs: 3, md: 6 },
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 3,
+                        bgcolor: 'background.surface',
                     }}
                 >
-                    <Typography level="h3" sx={{ textAlign: 'center', mb: 2 }}>
-                        Feel Free to Contact Me
+                    <Typography level="h1" sx={{ color: 'text.primary', textAlign: 'center' }}>
+                        Get in Touch
                     </Typography>
-                    <Typography level="body2" sx={{ textAlign: 'center', mb: 3 }}>
-                        Have a question or just want to say hi? Fill out the form below!
+                    <Typography level="body-md" sx={{ color: 'text.secondary', mb: 2, textAlign: 'center' }}>
+                        We'd love to hear from you! Please fill out the form below.
                     </Typography>
-                    <form onSubmit={handleSubmit}>
-                        <TextField
-                            name="name"
-                            placeholder="Your Name"
-                            label="Name"
-                            required
-                            sx={{ mb: 2 }}
+                    <FormControl required>
+                        <FormLabel>Your Name</FormLabel>
+                        <Input
+                            placeholder="Enter your name"
+                            variant="outlined"
+                            color="neutral"
                         />
-                        <TextField
-                            name="email"
+                    </FormControl>
+                    <FormControl required>
+                        <FormLabel>Email Address</FormLabel>
+                        <Input
+                            placeholder="you@example.com"
+                            variant="outlined"
+                            color="neutral"
                             type="email"
-                            placeholder="Your Email"
-                            label="Email"
-                            required
-                            sx={{ mb: 2 }}
                         />
-                        <TextField
-                            name="message"
-                            placeholder="Your Message"
-                            label="Message"
-                            required
-                            multiline
-                            minRows={3}
-                            sx={{ mb: 3 }}
+                    </FormControl>
+                    <FormControl required>
+                        <FormLabel>Message</FormLabel>
+                        <Textarea
+                            placeholder="Write your message here..."
+                            variant="outlined"
+                            color="neutral"
+                            minRows={5}
                         />
-                        <Button type="submit" fullWidth variant="solid" color="primary">
-                            Submit
-                        </Button>
-                    </form>
-                </Card>
+                    </FormControl>
+                    <Button
+                        variant="solid"
+                        color="primary"
+                        sx={{ mt: 2 }}
+                    >
+                        Send Message
+                    </Button>
+                </Sheet>
             </Box>
         </CssVarsProvider>
     );
-}
+};
+
+export default ContactForm;

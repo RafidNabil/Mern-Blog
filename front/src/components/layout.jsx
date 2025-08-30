@@ -12,10 +12,9 @@ export default function Layout({ children }) {
                 component="main"
                 sx={{
                     px: { xs: '4%', md: '16%' },
-                    mt: 10 // <-- margin below navbar
+                    mt: 10
                 }}
             >
-
                 {children}
             </Box>
             <Footer />

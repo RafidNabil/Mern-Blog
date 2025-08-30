@@ -1,178 +1,129 @@
-import React from 'react';
-import { Box, Typography, IconButton, Link } from '@mui/joy';
+import React, { useState, useEffect } from 'react';
+import { Box, Typography, IconButton, Link, Divider, Grid } from '@mui/joy';
 import { Facebook, Twitter, Instagram, LinkedIn } from '@mui/icons-material';
 
 const Footer = () => {
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/topics');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                setCategories(data);
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        };
+
+        fetchCategories();
+    }, []);
+
     return (
         <Box
             component="footer"
             sx={{
                 bgcolor: 'background.surface',
                 color: 'text.primary',
-                padding: '32px',
+                padding: { xs: '32px 16px', md: '64px 32px' },
                 borderTop: '1px solid',
                 borderColor: 'divider',
             }}
         >
-            <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    flexWrap: 'wrap',
-                    gap: '24px',
-                    maxWidth: '1200px',
-                    margin: '0 auto',
-                }}
-            >
-                {/* Left Section */}
-                <Box sx={{ maxWidth: '300px' }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, marginBottom: '16px' }}>
-                        <Box
-                            component="img"
-                            src="/path-to-logo.png"
-                            alt="Revision"
-                            sx={{ height: 32 }}
-                        />
-                        <Typography
-                            sx={{ fontWeight: 'bold', fontSize: '20px', color: 'text.primary' }}
-                        >
-                            REVISION
-                        </Typography>
-                    </Box>
-                    <Typography level="body2" sx={{ color: 'text.secondary', lineHeight: '1.5' }}>
+            {/* The main grid container */}
+            <Grid container spacing={4} sx={{ maxWidth: '1200px', margin: '0 auto' }}>
+                {/* Left Section - Brand and Social Links */}
+                <Grid xs={12} md={5}>
+                    <Typography
+                        level="h3"
+                        component="div"
+                        sx={{ fontWeight: 'bold', fontSize: '2rem', color: 'text.primary', mb: 2 }}
+                    >
+                        REVISION
+                    </Typography>
+                    <Typography level="body2" sx={{ color: 'text.secondary', lineHeight: '1.5', mb: 2 }}>
                         Welcome to the ultimate source for fresh perspectives! Explore curated content to enlighten, entertain, and engage global readers.
                     </Typography>
-                    <Box sx={{ display: 'flex', gap: 1, marginTop: '16px' }}>
-                        <IconButton
-                            variant="plain"
-                            sx={{ color: 'text.secondary', '&:hover': { bgcolor: 'background.level1' } }}
-                        >
+                    <Box sx={{ display: 'flex', gap: 1 }}>
+                        <IconButton variant="plain" color="neutral" sx={{ color: 'text.secondary' }}>
                             <Facebook />
                         </IconButton>
-                        <IconButton
-                            variant="plain"
-                            sx={{ color: 'text.secondary', '&:hover': { bgcolor: 'background.level1' } }}
-                        >
+                        <IconButton variant="plain" color="neutral" sx={{ color: 'text.secondary' }}>
                             <Twitter />
                         </IconButton>
-                        <IconButton
-                            variant="plain"
-                            sx={{ color: 'text.secondary', '&:hover': { bgcolor: 'background.level1' } }}
-                        >
+                        <IconButton variant="plain" color="neutral" sx={{ color: 'text.secondary' }}>
                             <Instagram />
                         </IconButton>
-                        <IconButton
-                            variant="plain"
-                            sx={{ color: 'text.secondary', '&:hover': { bgcolor: 'background.level1' } }}
-                        >
+                        <IconButton variant="plain" color="neutral" sx={{ color: 'text.secondary' }}>
                             <LinkedIn />
                         </IconButton>
                     </Box>
-                </Box>
+                </Grid>
 
-                {/* Middle and Right Sections */}
-                <Box
-                    sx={{
-                        display: 'flex',
-                        gap: 8,
-                        flexWrap: 'wrap',
-                        justifyContent: 'space-between',
-                    }}
-                >
-                    {/* Homepages */}
-                    <Box>
-                        <Typography
-                            sx={{ fontWeight: 'bold', marginBottom: '12px', color: 'text.primary' }}
-                        >
-                            HOMEPAGES
-                        </Typography>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                            <Link href="#" color="neutral" underline="hover" sx={{ color: 'text.secondary' }}>
-                                Classic List
-                            </Link>
-                            <Link href="#" color="neutral" underline="hover" sx={{ color: 'text.secondary' }}>
-                                Classic Grid
-                            </Link>
-                            <Link href="#" color="neutral" underline="hover" sx={{ color: 'text.secondary' }}>
-                                Classic Overlay
-                            </Link>
-                            <Link href="#" color="neutral" underline="hover" sx={{ color: 'text.secondary' }}>
-                                Hero Slider
-                            </Link>
-                            <Link href="#" color="neutral" underline="hover" sx={{ color: 'text.secondary' }}>
-                                Featured Posts
-                            </Link>
-                        </Box>
-                    </Box>
+                {/* This spacer Grid item pushes the following items to the right on medium and larger screens */}
+                <Grid md={1} sx={{ display: { xs: 'none', md: 'block' } }}></Grid>
 
-                    {/* Categories */}
-                    <Box>
-                        <Typography
-                            sx={{ fontWeight: 'bold', marginBottom: '12px', color: 'text.primary' }}
-                        >
-                            CATEGORIES
-                        </Typography>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                            <Link href="#" color="neutral" underline="hover" sx={{ color: 'text.secondary' }}>
-                                Technology
-                            </Link>
-                            <Link href="#" color="neutral" underline="hover" sx={{ color: 'text.secondary' }}>
-                                Travel
-                            </Link>
-                            <Link href="#" color="neutral" underline="hover" sx={{ color: 'text.secondary' }}>
-                                Sport
-                            </Link>
-                            <Link href="#" color="neutral" underline="hover" sx={{ color: 'text.secondary' }}>
-                                Business
-                            </Link>
-                        </Box>
-                    </Box>
+                {/* Middle Section - Dynamic Categories */}
+                <Grid xs={12} md={3}>
+                    <Typography
+                        level="h4"
+                        sx={{ fontWeight: 'bold', mb: 2, color: 'text.primary' }}
+                    >
+                        CATEGORIES
+                    </Typography>
+                    <Grid container spacing={2}>
+                        {categories.map((cat) => (
+                            <Grid key={cat._id} xs={6}>
+                                <Link
+                                    href={`/topics/${cat.label.toLowerCase().replace(/\s+/g, '')}`}
+                                    color="neutral"
+                                    underline="hover"
+                                    sx={{ color: 'text.secondary', fontWeight: 'md' }}
+                                >
+                                    {cat.label}
+                                </Link>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Grid>
 
-                    {/* Pages */}
-                    <Box>
-                        <Typography
-                            sx={{ fontWeight: 'bold', marginBottom: '12px', color: 'text.primary' }}
-                        >
-                            PAGES
-                        </Typography>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                            <Link href="#" color="neutral" underline="hover" sx={{ color: 'text.secondary' }}>
-                                About
-                            </Link>
-                            <Link href="#" color="neutral" underline="hover" sx={{ color: 'text.secondary' }}>
-                                Categories
-                            </Link>
-                            <Link href="#" color="neutral" underline="hover" sx={{ color: 'text.secondary' }}>
-                                Contacts
-                            </Link>
-                            <Link href="/login" color="neutral" underline="hover" sx={{ color: 'text.secondary' }}>
-                                Log In
-                            </Link>
-                            <Link href="/signup" color="neutral" underline="hover" sx={{ color: 'text.secondary' }}>
-                                Sign Up
-                            </Link>
-                            <Link href="/createpost" color="neutral" underline="hover" sx={{ color: 'text.secondary' }}>
-                                Create Post
-                            </Link>
-                        </Box>
+                {/* Right Section - Pages */}
+                <Grid xs={12} md={3}>
+                    <Typography
+                        level="h4"
+                        sx={{ fontWeight: 'bold', mb: 2, color: 'text.primary' }}
+                    >
+                        PAGES
+                    </Typography>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                        <Link href="/login" color="neutral" underline="hover" sx={{ color: 'text.secondary', fontWeight: 'md' }}>
+                            Log In
+                        </Link>
+                        <Link href="/signup" color="neutral" underline="hover" sx={{ color: 'text.secondary', fontWeight: 'md' }}>
+                            Sign Up
+                        </Link>
+                        <Link href="/createpost" color="neutral" underline="hover" sx={{ color: 'text.secondary', fontWeight: 'md' }}>
+                            Create Post
+                        </Link>
                     </Box>
-                </Box>
-            </Box>
+                </Grid>
+            </Grid>
 
             {/* Footer Bottom */}
-            <Box
+            <Divider sx={{ my: 4 }} />
+            <Typography
+                level="body-xs"
                 sx={{
                     textAlign: 'center',
-                    marginTop: '32px',
-                    paddingTop: '16px',
                     color: 'text.tertiary',
                     fontSize: '14px',
-                    borderTop: '1px solid',
-                    borderColor: 'divider',
                 }}
             >
                 © 2024 — Revision. All Rights Reserved.
-            </Box>
+            </Typography>
         </Box>
     );
 };

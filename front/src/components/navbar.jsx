@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     Box,
@@ -7,11 +7,19 @@ import {
     Switch,
     Typography,
     Container,
+    Input,
 } from '@mui/joy';
 import { Search, Person, Menu, DarkMode, LightMode } from '@mui/icons-material';
 
 function Navbar({ toggleTheme, isDarkMode }) {
     const navigate = useNavigate();
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleSearch = () => {
+        if (searchQuery.trim() !== '') {
+            navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+        }
+    };
 
     return (
         <Box
@@ -55,7 +63,6 @@ function Navbar({ toggleTheme, isDarkMode }) {
                     </Typography>
                 </Box>
 
-                {/* Center Section - Navigation Links (hidden on small screens) */}
                 <Box
                     sx={{
                         display: { xs: 'none', md: 'flex' },
@@ -65,7 +72,7 @@ function Navbar({ toggleTheme, isDarkMode }) {
                         justifyContent: 'center',
                     }}
                 >
-                    {['Home', 'About', 'Contact'].map((label) => (
+                    {['About', 'Contact'].map((label) => (
                         <Button
                             key={label}
                             variant="plain"
@@ -94,6 +101,24 @@ function Navbar({ toggleTheme, isDarkMode }) {
                         gap: 2,
                     }}
                 >
+                    {/* Search Bar for Desktop */}
+                    <Input
+                        placeholder="Search..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onKeyPress={(e) => {
+                            if (e.key === 'Enter') {
+                                handleSearch();
+                            }
+                        }}
+                        endDecorator={
+                            <IconButton variant="plain" onClick={handleSearch}>
+                                <Search />
+                            </IconButton>
+                        }
+                        sx={{ display: { xs: 'none', md: 'flex' } }}
+                    />
+
                     <Button
                         variant="solid"
                         color="primary"
@@ -107,10 +132,15 @@ function Navbar({ toggleTheme, isDarkMode }) {
                     >
                         Create Post
                     </Button>
+                    {/* Mobile Search Icon */}
                     <IconButton
                         variant="plain"
                         color="neutral"
-                        onClick={() => navigate('/search')}
+                        onClick={() => {
+                            // You can navigate to a search page/modal for mobile
+                            navigate('/search');
+                        }}
+                        sx={{ display: { xs: 'flex', md: 'none' } }}
                     >
                         <Search />
                     </IconButton>
