@@ -10,7 +10,7 @@ export default function ReadNextSection({ topics, authors }) {
     React.useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/posts'); 
+                const res = await fetch('/api/posts'); 
                 if (!res.ok) throw new Error('Failed to fetch posts');
                 const data = await res.json();
                 const shuffled = data.sort(() => 0.5 - Math.random());

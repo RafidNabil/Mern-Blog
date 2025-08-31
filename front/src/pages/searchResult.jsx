@@ -38,7 +38,7 @@ function SearchPage() {
             setLoading(true);
             setError(null);
             try {
-                const response = await fetch(`http://localhost:5000/api/search?q=${encodeURIComponent(searchQuery)}`);
+                const response = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}`);
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
                 setResults(data);
@@ -54,8 +54,8 @@ function SearchPage() {
         const fetchAuthorsAndTopics = async () => {
             try {
                 const [authorsRes, topicsRes] = await Promise.all([
-                    fetch('http://localhost:5000/api/author'),
-                    fetch('http://localhost:5000/api/topics')
+                    fetch('/api/author'),
+                    fetch('/api/topics')
                 ]);
                 const authorsData = await authorsRes.json();
                 const topicsData = await topicsRes.json();

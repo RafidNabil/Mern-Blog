@@ -22,7 +22,7 @@ function BlogPage() {
     React.useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/posts/${id}`);
+                const response = await fetch(`/api/posts/${id}`);
                 const data = await response.json();
                 setPost(data);
             } catch (error) {
@@ -31,7 +31,7 @@ function BlogPage() {
         };
         const fetchTopics = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/topics');
+                const res = await fetch('/api/topics');
                 if (!res.ok) throw new Error('Failed to fetch categories');
                 const data = await res.json();
                 setTopics(data);
@@ -41,7 +41,7 @@ function BlogPage() {
         };
         const fetchAuthors = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/author');
+                const res = await fetch('/api/author');
                 if (!res.ok) throw new Error('Failed to fetch authors');
                 const data = await res.json();
                 setAuthors(data);

@@ -20,7 +20,7 @@ function Home() {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/posts');
+                const response = await fetch('/api/posts');
                 const data = await response.json();
                 setPosts(data);
             } catch (error) {
@@ -29,7 +29,7 @@ function Home() {
         };
         const fetchTopics = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/topics');
+                const response = await fetch('/api/topics');
                 const data = await response.json();
                 setTopics(data);
             } catch (error) {
@@ -38,7 +38,7 @@ function Home() {
         };
         const fetchAuthors = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/author');
+                const response = await fetch('/api/author');
                 const data = await response.json();
                 setAuthors(data);
             } catch (error) {

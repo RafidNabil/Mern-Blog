@@ -16,7 +16,7 @@ const ProfileSection = ({ topics, authors }) => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await fetch(`http://localhost:5000/api/users/${userId}`);
+                const res = await fetch(`/api/users/${userId}`);
                 if (!res.ok) throw new Error('Failed to fetch user');
                 const data = await res.json();
                 setUser(data);

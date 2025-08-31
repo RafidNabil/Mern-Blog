@@ -38,7 +38,7 @@ export default function Login() {
         setError('');
 
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/login', formData);
+            const response = await axios.post('/api/auth/login', formData);
             console.log('Login successful:', response.data);
             setError('Login successful! Redirecting to dashboard...');
 

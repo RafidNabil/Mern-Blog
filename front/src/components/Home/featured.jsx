@@ -18,7 +18,7 @@ export default function Featured({ authorsMap, topicMap }) {
                     "689e1cde0a12150383288580"
                 ];
 
-                const res = await fetch("http://localhost:5000/api/posts");
+                const res = await fetch("/api/posts");
                 const data = await res.json();
 
                 // Filter the posts to only show the ones with the specified IDs

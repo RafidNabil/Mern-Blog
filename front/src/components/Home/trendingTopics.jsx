@@ -21,7 +21,7 @@ const TrendingTopics = ({ onTopicSelect }) => {
     useEffect(() => {
         const fetchTopics = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/topics');
+                const response = await axios.get('/api/topics');
                 const fetchedTopics = response.data.map((topic) => ({
                     label: topic.label.replace(/\s+/g, ''),
                     icon: iconMap[topic.label.replace(/\s+/g, '')] || null,

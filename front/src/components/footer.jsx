@@ -8,7 +8,7 @@ const Footer = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/topics');
+                const response = await fetch('/api/topics');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }

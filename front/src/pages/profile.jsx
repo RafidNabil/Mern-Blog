@@ -21,7 +21,7 @@ function Profile() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await fetch(`http://localhost:5000/api/users/${userId}`);
+                const res = await fetch(`/api/users/${userId}`);
                 if (!res.ok) throw new Error('Failed to fetch user');
                 const data = await res.json();
                 setUser(data);
@@ -40,7 +40,7 @@ function Profile() {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/posts');
+                const res = await fetch('/api/posts');
                 const data = await res.json();
                 setPosts(data);
             } catch (err) { console.error(err); }
@@ -60,7 +60,7 @@ function Profile() {
 
     const handleUpdate = async () => {
         try {
-            const res = await fetch(`http://localhost:5000/api/users/${userId}`, {
+            const res = await fetch(`/api/users/${userId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData)
@@ -75,7 +75,7 @@ function Profile() {
     const handleEditPost = (id) => navigate(`/edit-post/${id}`);
     const handleDeletePost = async (id) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/posts/${id}`, { method: 'DELETE' });
+            const res = await fetch(`/api/posts/${id}`, { method: 'DELETE' });
             if (res.ok) setPosts(prev => prev.filter(p => p._id !== id));
         } catch (err) { console.error(err); }
     };

@@ -23,7 +23,7 @@ export default function CardCarousel({ topicMap, authorMap }) {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/posts');
+                const response = await fetch('/api/posts');
                 const data = await response.json();
 
                 // pick 3 random posts

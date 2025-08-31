@@ -35,7 +35,7 @@ export default function CreateBlogPost() {
     useEffect(() => {
         const fetchTopics = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/topics');
+                const res = await fetch('/api/topics');
                 if (!res.ok) throw new Error('Failed to fetch topics');
                 const data = await res.json();
                 setTopics(data);
@@ -46,7 +46,7 @@ export default function CreateBlogPost() {
 
         const fetchAuthors = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/author');
+                const res = await fetch('/api/author');
                 if (!res.ok) throw new Error('Failed to fetch authors');
                 const data = await res.json();
                 setAuthors(data);
@@ -85,7 +85,7 @@ export default function CreateBlogPost() {
             const formDataUpload = new FormData();
             formDataUpload.append('file', file);
 
-            const response = await fetch('http://localhost:5000/api/upload-cover-image', {
+            const response = await fetch('/api/upload-cover-image', {
                 method: 'POST',
                 body: formDataUpload,
             });
@@ -107,7 +107,7 @@ export default function CreateBlogPost() {
             const formDataUpload = new FormData();
             formDataUpload.append('file', blobInfo.blob(), blobInfo.filename());
 
-            const response = await fetch('http://localhost:5000/api/upload-image', {
+            const response = await fetch('/api/upload-image', {
                 method: 'POST',
                 body: formDataUpload,
             });
@@ -127,7 +127,7 @@ export default function CreateBlogPost() {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:5000/api/create-blog', {
+            const response = await fetch('/api/create-blog', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),

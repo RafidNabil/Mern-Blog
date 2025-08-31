@@ -11,7 +11,7 @@ const PostCards = ({ post }) => {
     useEffect(() => {
         const fetchTopics = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/topics');
+                const res = await fetch('/api/topics');
                 if (!res.ok) throw new Error('Failed to fetch categories');
                 const data = await res.json();
                 setTopics(data);
@@ -21,7 +21,7 @@ const PostCards = ({ post }) => {
         };
         const fetchAuthors = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/author');
+                const res = await fetch('/api/author');
                 if (!res.ok) throw new Error('Failed to fetch authors');
                 const data = await res.json();
                 setAuthors(data);

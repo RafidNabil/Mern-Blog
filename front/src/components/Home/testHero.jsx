@@ -14,7 +14,7 @@ export default function OverflowCard({ authorsMap }) {
     React.useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/posts/689e1666180c323b19ccd2cc`);
+                const response = await fetch(`/api/posts/689e1666180c323b19ccd2cc`);
                 const data = await response.json();
                 setPost(data);
             } catch (error) {
